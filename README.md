@@ -8,11 +8,11 @@ Sharing MATLAB code and data for reproducing results and facilitating review.
 ## Repository Structure
 
 * **`ODWyNDA.m`**: MATLAB simulation code for online discovery of the sparse WyNDA framework.
-* * **`WILibFuncs.m`**: Basis library functions to accompany `ODWyNDA.m`.
-* * **`NWIData.mat`**: Sequential simulation data to accompany `ODWyNDA.m`.
+  * **`WILibFuncs.m`**: Basis library functions to accompany `ODWyNDA.m`.
+  * **`NWIData.mat`**: Sequential simulation data to accompany `ODWyNDA.m`.
 * **`DSWyNDA.m`**: MATLAB simulation code of the sparse WyNDA framework for decision support applications.
-* * **`BBNFuncs.m`**: Bayesian belief network function to accompany `DSWyNDA.m`.
-* * **`FWIData.mat`**: Sequential simulation data to accompany `DSWyNDA.m`.
+  * **`BBNFuncs.m`**: Bayesian belief network function to accompany `DSWyNDA.m`.
+  * **`FWIData.mat`**: Sequential simulation data to accompany `DSWyNDA.m`.
 
 ## European Safety and Reliability Conference
 
