@@ -1,4 +1,4 @@
-# Online Discovery and Decision Supprt for Subsea Systems
+# Online Discovery and Decision Support for Subsea Seawater Injection Systems
 This repository contains simulations for submersible cascade pump system for online identification and decision support tools using sparse WyNDA (with recursive sparse regression and recursive sparse Bayesian learning), supporting our submission to the European Safety and Reliability Conference.
 
 ## Purpose
