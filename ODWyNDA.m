@@ -4,7 +4,7 @@ clear all; close all;
 load NWIData.mat;
 
 % Simulation parameters
-K = 3; % Sparsity index (0, 1, 2, or 3)
+K = 0; % Sparsity index (0, 1, 2, or 3)
 dt = 0.5; n = 3; 
 R = 11; r = R + (K * R);
 R1 = 4; R2 = 6; R3 = 1;
@@ -30,8 +30,8 @@ xakfArray = []; xbarArray = []; xhatArray = [];
 takfArray = []; tbarArray = []; thatArray = [];
 
 % AKF parameters
-lambda = 0.999; Q = 0.1*eye(n); R = 0.1*eye(n);
-P = 0.01*eye(n); Upsilon = zeros(n,r); S = 1e-8*eye(r); 
+lambda = 0.999; Q = 5e6*eye(n); R = 0.1*eye(n); 
+P = 0.01*eye(n); Upsilon = zeros(n,r); S = 1e-10*eye(r); 
 
 % RSR parameters
 db = 1e-5; pb = 100;
@@ -143,11 +143,11 @@ fprintf('| %-9s | %15.7e |\n', 'RSBL', rhat);
 fprintf('-------------------------------\n');
 
 %% Visualisation
-t = [0:0.5:16200] / 60;
+t = [0:dt:27000];
 
 % State figure
 fh = figure(1);
-fh.Position = [150 400 500 400];
+fh.Position = [150 400 500 500];
 
 subplot(3,1,1);
 plot(t, yactArray(1,:), 'k', 'LineWidth', 10); hold on;
@@ -155,7 +155,8 @@ plot(t, xakfArray(1,:), '-.', 'LineWidth', 5);
 plot(t, xbarArray(1,:), ':', 'LineWidth', 5);
 plot(t, xhatArray(1,:), '--', 'LineWidth', 5);
 ylabel('$\bar{p_f}\;(\mathrm{bar})$', 'Interpreter','latex');
-xlim("tight"); ylim([100 260]); set(gca, 'FontSize', 18); hold off; 
+xlim("tight"); ylim([100 260]); grid("on");
+set(gca, 'FontSize', 18); hold off; 
 
 subplot(3,1,2);
 plot(t, yactArray(2,:), 'k', 'LineWidth', 10); hold on;
@@ -163,7 +164,8 @@ plot(t, xakfArray(2,:), '-.', 'LineWidth', 5);
 plot(t, xbarArray(2,:), ':', 'LineWidth', 5);
 plot(t, xhatArray(2,:), '--', 'LineWidth', 5);
 ylabel('$\bar{p_i}\;(\mathrm{bar})$', 'Interpreter','latex');
-xlim("tight"); ylim([200 380]); set(gca, 'FontSize', 18); hold off;  
+xlim("tight"); ylim([200 380]); grid("on");
+set(gca, 'FontSize', 18); hold off;  
 
 subplot(3,1,3);
 plot(t, yactArray(3,:), 'k', 'LineWidth', 10); hold on;
@@ -171,9 +173,10 @@ plot(t, xakfArray(3,:), '-.', 'LineWidth', 5);
 plot(t, xbarArray(3,:), ':', 'LineWidth', 5);
 plot(t, xhatArray(3,:), '--', 'LineWidth', 5);
 legend('Trajectory', 'AKF', 'RSR','RSBL', 'Location', 'best');
-xlabel('$t\;(\mathrm{m})$', 'Interpreter','latex');
+xlabel('$t\;(\mathrm{h})$', 'Interpreter','latex');
 ylabel('$\bar{q_r}\;(\mathrm{m^3/h})$', 'Interpreter','latex');
-xlim("tight"); ylim([-1 460]); set(gca, 'FontSize', 18); hold off; 
+xlim("tight"); ylim([-1 460]); grid("on");
+set(gca, 'FontSize', 18); hold off; 
 
 %% Function
 

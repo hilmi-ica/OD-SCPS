@@ -77,7 +77,7 @@ end
 
 % RUL prediction
 t_obs = [dt:dt:i*dt];
-t_sim = [0:dt:100000];
+t_sim = [0:dt:80000];
 deff_pred = deff;
 for k = i:t_sim(end) / dt
     % Wiener process
@@ -90,26 +90,26 @@ end
 % RUL propagation
 fh = figure(1);
 fh.Position = [500 600 650 300];
-plot(t_sim / 60, deff_pred, 'LineWidth', 8); hold on
-plot(t_obs / 60, deff, 'k', 'LineWidth', 8);
+plot(t_sim, deff_pred, 'LineWidth', 8); hold on
+plot(t_obs, deff, 'k', 'LineWidth', 8);
 yline(1, 'r--', {'Failure Threshold'}, 'LabelHorizontalAlignment', ...
     'left', 'LabelVerticalAlignment', 'bottom', 'Linewidth', 5, ...
     'FontSize', 18); xlim("tight"), ylim("tight");
-xline(t_sim(min(find(deff_pred > 1))) / 60, 'k-.', ...
+xline(t_sim(min(find(deff_pred > 1))), 'k-.', ...
     {'Predicted Failure Time'}, 'LabelVerticalAlignment', 'bottom', ...
     'LineWidth', 5, 'FontSize', 18); grid("on");
 legend('Prediction', 'Observation', 'Location', 'best')
-xlabel('$t\;(\mathrm{m})$', 'Interpreter','latex');
+xlabel('$t\;(\mathrm{h})$', 'Interpreter','latex');
 ylabel('$d$', 'Interpreter','latex');  
 set(gca, 'FontSize', 18); hold off
 
 % PDF evolution
 fh = figure(2);
 fh.Position =[600 500 550 350];
-t = [50000:1000:700000]; 
+t = [50000:1000:550000]; 
 
 % PDF calculation
-obsp = 3000; obsp0 = obsp; obsd = 20;
+obsp = 5000; obsp0 = obsp; obsd = 20;
 for k = 1:obsd
     % Wiener PDF
     pdf(k,:) = (sqrt(2 * pi * si(obsp).^2 .* t.^3)).^(-1) .* ...
@@ -117,7 +117,7 @@ for k = 1:obsd
     obs_pdf = obsp * ones(size(t)); 
 
     % Plot PDF
-    h1 = plot3(t / 60, obs_pdf/60 , pdf(k,:), 'k', 'LineWidth', 3); 
+    h1 = plot3(t, obs_pdf , pdf(k,:), 'k', 'LineWidth', 3); 
     hold on;
     
     % MTTF calculation
@@ -129,20 +129,20 @@ for k = 1:obsd
 end
 
 % Plot MTTF
-h2 = plot3(max_pred / 60, max_obs / 60, max_pdf, 'o-', ...
+h2 = plot3(max_pred, max_obs, max_pdf, 'o-', ...
     'LineWidth', 5, 'MarkerSize', 10); grid("on");
 legend([h2], {'MTTF'}, 'Location', 'best');
 xlim("tight"), ylim("tight"); zlim("tight");
-xlabel('$\mathrm{Simulation\;Time\;(m)}$', 'Interpreter','latex');
-ylabel('$\mathrm{Observation\;Period\;(m)}$', 'Interpreter','latex'); 
+xlabel('$\mathrm{Simulation\;Time\;(h)}$', 'Interpreter','latex');
+ylabel('$\mathrm{Observation\;Period\;(h)}$', 'Interpreter','latex'); 
 zlabel('$\mathrm{PDF}$', 'Interpreter','latex');
 view([45, 30]); set(gca, 'FontSize', 18); hold off;
 
 % PoF plot by BBN
 fh = figure(3);
-fh.Position =[600 500 550 350];
-plot(t_obs / 60, PoF, 'LineWidth', 10);
-xlabel('$t\;(\mathrm{m})$', 'Interpreter','latex');
+fh.Position =[600 500 650 300];
+plot(t_obs, PoF, 'LineWidth', 10);
+xlabel('$t\;(\mathrm{h})$', 'Interpreter','latex');
 ylabel('$P(F=1)$', 'Interpreter','latex');
 grid on; xlim tight, ylim tight;
 set(gca, 'FontSize', 18); hold off;
