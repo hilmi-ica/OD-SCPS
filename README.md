@@ -14,6 +14,14 @@ Sharing MATLAB code and data for reproducing results and facilitating review.
   * **`BBNFuncs.m`**: Bayesian belief network function to accompany `DSWyNDA.m`.
   * **`FWIData.mat`**: Sequential simulation data to accompany `DSWyNDA.m`.
 
-## European Safety and Reliability Conference
+## Reference
 
-This repository directly supports data and code for our paper submission.
+M. Hilmi, J. Vatn, A. Hasan, and M. A. Lundteigen, “Online model discovery under parameter uncertainty for risk and reliability-based decision support,” in Proceedings of the 36th European Safety and Reliability Conference, 2026.
+```
+@INPROCEEDINGS{OD-SCPS,
+    author = {Hilmi, Muhammad and Vatn, Jørn and Hasan, Agus and Lundteigen, Mary Ann},
+    title = {Online Model Discovery under Parameter Uncertainty for Risk and Reliability-Based Decision Support},
+    booktitle = {Proceedings of the 36th European Safety and Reliability Conference},
+    year = {2026}
+}
+```
